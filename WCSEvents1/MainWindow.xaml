@@ -5,8 +5,299 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WCSEvents1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="RegistrationMaster6000" Height="800" Width="1024">
+
+    <!--Color: #FF9EB7FF-->
     <Grid>
-        
+        <Grid x:Name="LeftPanel" HorizontalAlignment="Left" Height="770" Margin="0 0 0 0" VerticalAlignment="Top" Width="120" Background="#FF9EB7FF">
+            <TabControl x:Name="TabPanel" TabStripPlacement="Left" HorizontalAlignment="Left" Height="761" Margin="0,56,-899,-47" VerticalAlignment="Top" Width="1019" Background="White" SelectedIndex="0">
+                <TabItem Header="Register Dancer" Padding="10" Background="{x:Null}" BorderThickness="0">
+                    <Grid x:Name="MainPanel" VerticalAlignment="Bottom" Height="754" Margin="0 0 0 0">
+                        <Border Padding="20" HorizontalAlignment="Left" Width="901">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- First Name-->
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="First Name" />
+                                        <TextBox x:Name="FirstName" Margin="0 0 10 0" Padding="3"/>
+                                    </StackPanel>
+                                    <!-- Last Name-->
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Margin="10 0 0 0" Text="Last Name" />
+                                        <TextBox x:Name="LastName" Margin="10 0 0 0" Padding="3"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--email-->
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Margin="0 10 10 0" Text="Email" />
+                                        <TextBox Margin="0 0 10 0" Padding="3" x:Name="Email" TextChanged="Email_TextChanged"/>
+                                    </StackPanel>
+                                    <!-- WSDC Number-->
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Margin="10 10 0 0" Text="WSDC Number" />
+                                        <TextBox Margin="10 0 270 0" Padding="3" x:Name="WsdcNumber" TextChanged="WsdcNumber_TextChanged" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Workshop Level-->
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Margin="0 10 0 0" Text="Workshop level" />
+                                        <ComboBox x:Name="WorkshopLvl" Margin="0 0 270 0" SelectedIndex="0" Padding="3">
+                                            <ComboBoxItem>Novice</ComboBoxItem>
+                                            <ComboBoxItem>Intermediate</ComboBoxItem>
+                                            <ComboBoxItem>Adv/All Star</ComboBoxItem>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <!-- Comp level-->
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Margin="10 10 0 0" Text="Competition Level" />
+                                        <ComboBox x:Name="CompLvl" Margin="10 0 270 0" SelectedIndex="1" Padding="3">
+                                            <ComboBoxItem>Newcomer</ComboBoxItem>
+                                            <ComboBoxItem>Novice</ComboBoxItem>
+                                            <ComboBoxItem>Intermediate</ComboBoxItem>
+                                            <ComboBoxItem>Advanced</ComboBoxItem>
+                                            <ComboBoxItem>All Star</ComboBoxItem>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Workshop Role-->
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Margin="0 10 0 0" Text="Workshop Role" />
+                                        <ComboBox x:Name="WorkshopRole" Margin="0 0 270 0" SelectedIndex="0" Padding="3">
+                                            <ComboBoxItem>Leader</ComboBoxItem>
+                                            <ComboBoxItem>Follower</ComboBoxItem>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <!-- Comp role-->
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Margin="10 10 0 0" Text="Competition Role" />
+                                        <ComboBox x:Name="CompRole" Margin="10 0 270 0" SelectedIndex="0" Padding="3">
+                                            <ComboBoxItem>Leader</ComboBoxItem>
+                                            <ComboBoxItem>Follower</ComboBoxItem>
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Register button-->
+                                    <StackPanel Grid.Column="0">
+                                        <Button Margin="0 20 170 0" Content="Register" x:Name="RegisterButton" Click="RegisterButton_Click"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Comp Registration" Padding="10" Background="{x:Null}" BorderThickness="0">
+                    <Border Padding="20">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- First Name-->
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="First Name" />
+                                    <TextBox x:Name="JnJFirstName" Margin="0 0 10 0" Padding="3"/>
+                                </StackPanel>
+                                <!-- Last Name-->
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Margin="10 0 0 0" Text="Last Name" />
+                                    <TextBox x:Name="JnJLastName" Margin="10 0 0 0" Padding="3"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- WSDC Number-->
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Margin="0 10 0 0" Text="JnJ Level" />
+                                    <ComboBox x:Name="JnJCompLvl" Margin="0 0 0 0" SelectedIndex="1" Padding="3">
+                                        <ComboBoxItem>Newcomer</ComboBoxItem>
+                                        <ComboBoxItem>Novice</ComboBoxItem>
+                                        <ComboBoxItem>Intermediate</ComboBoxItem>
+                                        <ComboBoxItem>Advanced</ComboBoxItem>
+                                        <ComboBoxItem>All Star</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                                <!-- Comp role-->
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Margin="0 10 0 0" Text="Competition Role" />
+                                    <ComboBox x:Name="JnJCompRole" Margin="0 0 0 0" SelectedIndex="0" Padding="3">
+                                        <ComboBoxItem>Leader</ComboBoxItem>
+                                        <ComboBoxItem>Follower</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                                <!-- WSDC Number box-->
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Margin="0 10 0 0" Text="WSDC Number" />
+                                    <TextBox Margin="0 0 0 0" Padding="3" x:Name="JnJWsdcNumber" TextChanged="JnJWsdcNumber_TextChanged"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Margin="0 10 0 0" Text="Strictly Level" />
+                                    <ComboBox x:Name="StrictlyLvl" Margin="0 0 0 0" SelectedIndex="1" Padding="3">
+                                        <ComboBoxItem>Newcomer</ComboBoxItem>
+                                        <ComboBoxItem>Novice</ComboBoxItem>
+                                        <ComboBoxItem>Intermediate</ComboBoxItem>
+                                        <ComboBoxItem>Advanced</ComboBoxItem>
+                                        <ComboBoxItem>All Star</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                                <!-- Comp role-->
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Margin="0 10 0 0" Text="Stricty Role" />
+                                    <ComboBox x:Name="StrictlyRole" Margin="0 0 0 0" SelectedIndex="0" Padding="3">
+                                        <ComboBoxItem>Leader</ComboBoxItem>
+                                        <ComboBoxItem>Follower</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                                <!-- First Name-->
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="Partner First Name" Margin="0 10 0 0"/>
+                                    <TextBox x:Name="StrictlyPartnerFirstName" Margin="0 0 0 0" Padding="3"/>
+                                </StackPanel>
+                                <!-- Last Name-->
+                                <StackPanel Grid.Column="3">
+                                    <TextBlock Margin="0 10 0 0" Text="Partner Last Name" />
+                                    <TextBox x:Name="StrictlyPartnerLastName" Margin="0 0 0 0" Padding="3"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Register button-->
+                                <StackPanel Grid.Column="0">
+                                    <Button Margin="0 20 170 0" Content="Register" x:Name="JnJCompRegisterButton" Click="JnJCompRegisterButton_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </TabItem>
+                <TabItem Header="Jack &amp; Jill" Padding="10" Background="{x:Null}" BorderThickness="0">
+                    <TabControl x:Name="JnJDivisionsTab" HorizontalAlignment="Left" VerticalAlignment="Top" Height="728" Width="870">
+                        <TabItem Header="Newcomer" Background="{x:Null}" BorderThickness="0">
+                            <Grid>
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <Label Content="Leaders"/>
+                                    <DataGrid  ItemsSource="{Binding NewComerLeaders}" Width="360" Margin="10,0,0,0" HorizontalAlignment="Left">
+
+                                    </DataGrid>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <Label Content="Followers"/>
+                                    <DataGrid  ItemsSource="{Binding NewComerFollowers}" Width="360" Margin="10,0,0,0" HorizontalAlignment="Left">
+
+                                    </DataGrid>
+                                </StackPanel>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Novice" Background="{x:Null}" BorderThickness="0">
+
+                        </TabItem>
+                        <TabItem Header="Intermediate" Background="{x:Null}" BorderThickness="0">
+
+                        </TabItem>
+                        <TabItem Header="Advanced" Background="{x:Null}" BorderThickness="0">
+
+                        </TabItem>
+                        <TabItem Header="All Star" Background="{x:Null}" BorderThickness="0">
+
+                        </TabItem>
+                        <TabItem Header="Sophisticated" Background="{x:Null}" BorderThickness="0">
+
+                        </TabItem>
+                        <TabItem Header="All European" Background="{x:Null}" BorderThickness="0">
+
+                        </TabItem>
+
+                    </TabControl>
+                </TabItem>
+                <TabItem Header="Strictly" Padding="10" Background="{x:Null}" BorderThickness="0">
+
+                </TabItem>
+                <TabItem Header="Judges" Padding="10" Background="{x:Null}" BorderThickness="0">
+
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <Grid x:Name="TopPanel" HorizontalAlignment="Left" Height="55" Margin="120,0, 0,0" VerticalAlignment="Top" Width="904" Background="#FF9EB7FF">
+
+
+
+        </Grid>
+
+
+
+
     </Grid>
+
 </Window>
+
+    
