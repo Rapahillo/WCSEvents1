@@ -18,6 +18,7 @@ namespace WCSEvents1.Models
         public string JnJRole { get; set; }
         public Nullable<int> WsdcNumber { get; set; }
         public string JnJDivision { get; set; }
+        public int Bib { get; set; }
     
         public virtual Participant Participant { get; set; }
     }

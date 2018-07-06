@@ -16,6 +16,13 @@ using System.Threading;
 using System.Net.Mail;
 using WCSEvents1.Models;
 using System.Reflection;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net;
+using System.Data;
+using System.IO;
+using System.ComponentModel;
+using Newtonsoft.Json.Linq;
 
 namespace WCSEvents1
 {
@@ -24,10 +31,10 @@ namespace WCSEvents1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static readonly HttpClient client = new HttpClient();
         public MainWindow()
         {
             InitializeComponent();
-
 
 
         }
@@ -155,11 +162,90 @@ namespace WCSEvents1
 
         private void JnJWsdcNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             IsValidWSDCNumber(e);
+            try
+            {
+                int number = Int32.Parse(JnJWsdcNumber.Text);
+                GetWsdcDataWithNumber(JnJWsdcNumber.Text);
+            }
+            catch (Exception)
+            {
+
+            }
         }
-        private void GetWsdcDataWithNumber()
+
+
+        private void GetWsdcDataWithNumber(string number)
         {
             // https://points.worldsdc.com/lookup/find?num=10612
+
+            string url = "https://points.worldsdc.com/lookup/find?num=";
+            //string wsdcNumber = JnJWsdcNumber.ToString();
+            string wsdcNumber = 10612.ToString();
+            string parsedUrl = getString(url, wsdcNumber);
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(parsedUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string json = "{\"user\":\"test\"," +
+                              "\"password\":\"bla\"}";
+
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            var result = "";
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+
+            //var content = new StringContent("application/json");
+            //var response = await client.PostAsync(parsedUrl, content);
+            //string result = await response.Content.ReadAsStringAsync();
+
+            WsdcDatabaseDancer jDancer = DeserializeJson(result);
+            //WsdcDatabaseDataGrid.ItemsSource = jDancer.placements.West_Coast_Swing;
+            //this.DataContext = jDancer;
+
+        }
+
+        private WsdcDatabaseDancer DeserializeJson(string result)
+        {
+            try
+            {
+
+                // Fix the "West Coast Swing" string format in the JSON
+                var s = result.Replace("West Coast Swing", "West_Coast_Swing");
+                //DataTable dt = (DataTable)JsonConvert.DeserializeObject(s, (typeof(DataTable)));
+                WsdcDatabaseDancer dancer = JsonConvert.DeserializeObject<WsdcDatabaseDancer>(s);
+
+                return dancer;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Json Deserialize error: " + e.ToString());
+                return null;
+            }
+        }
+        private string getString(string a, string b)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(a).Append(b);
+
+            return sb.ToString();
+        }
+
+        private void JnJTabOpen_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Here comes JnJTab's open functionalities
+            // ex. load division leaders and followers
         }
     }
 }

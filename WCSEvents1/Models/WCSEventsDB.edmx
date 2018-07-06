@@ -7,12 +7,13 @@
     <Schema Namespace="WCSEventsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="JnJCompetitors">
           <Key>
-            <PropertyRef Name="ParticipantID" />
+            <PropertyRef Name="Bib" />
           </Key>
           <Property Name="ParticipantID" Type="int" Nullable="false" />
           <Property Name="JnJRole" Type="varchar" MaxLength="50" />
           <Property Name="WsdcNumber" Type="int" />
           <Property Name="JnJDivision" Type="varchar" MaxLength="50" />
+          <Property Name="Bib" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Participant">
           <Key>
@@ -28,10 +29,11 @@
           <Property Name="WorkshopLevel" Type="varchar" MaxLength="50" />
           <Property Name="CompRole" Type="varchar" MaxLength="50" />
           <Property Name="WorkshopRole" Type="varchar" MaxLength="50" />
+          <Property Name="Paid" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="StrictlyCompetitors">
           <Key>
-            <PropertyRef Name="ParticipantID" />
+            <PropertyRef Name="Bib" />
           </Key>
           <Property Name="ParticipantID" Type="int" Nullable="false" />
           <Property Name="StrictlyRole" Type="varchar" MaxLength="50" />
@@ -39,6 +41,7 @@
           <Property Name="PartnerFirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PartnerLastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PartnerID" Type="int" />
+          <Property Name="Bib" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -50,9 +53,9 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Competitors_Participant">
+        <Association Name="FK_JnJCompetitors_Participant">
           <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
-          <End Role="JnJCompetitors" Type="Self.JnJCompetitors" Multiplicity="0..1" />
+          <End Role="JnJCompetitors" Type="Self.JnJCompetitors" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Participant">
               <PropertyRef Name="ParticipantID" />
@@ -62,9 +65,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StrictlyCompetitors_Participant">
+        <Association Name="FK_StrictlyCompetitors_Participant1">
           <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
-          <End Role="StrictlyCompetitors" Type="Self.StrictlyCompetitors" Multiplicity="0..1" />
+          <End Role="StrictlyCompetitors" Type="Self.StrictlyCompetitors" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Participant">
               <PropertyRef Name="ParticipantID" />
@@ -79,11 +82,11 @@
           <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StrictlyCompetitors" EntityType="Self.StrictlyCompetitors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Competitors_Participant" Association="Self.FK_Competitors_Participant">
+          <AssociationSet Name="FK_JnJCompetitors_Participant" Association="Self.FK_JnJCompetitors_Participant">
             <End Role="Participant" EntitySet="Participant" />
             <End Role="JnJCompetitors" EntitySet="JnJCompetitors" />
           </AssociationSet>
-          <AssociationSet Name="FK_StrictlyCompetitors_Participant" Association="Self.FK_StrictlyCompetitors_Participant">
+          <AssociationSet Name="FK_StrictlyCompetitors_Participant1" Association="Self.FK_StrictlyCompetitors_Participant1">
             <End Role="Participant" EntitySet="Participant" />
             <End Role="StrictlyCompetitors" EntitySet="StrictlyCompetitors" />
           </AssociationSet>
@@ -106,19 +109,20 @@
           <Property Name="WorkshopLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CompRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="WorkshopRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="JnJCompetitors" Relationship="WCSEventsModel.FK_Competitors_Participant1" FromRole="Participant" ToRole="JnJCompetitors" />
-          <NavigationProperty Name="StrictlyCompetitors" Relationship="WCSEventsModel.FK_StrictlyCompetitors_Participant" FromRole="Participant" ToRole="StrictlyCompetitors" />
+          <Property Name="Paid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JnJCompetitors" Relationship="WCSEventsModel.FK_JnJCompetitors_Participant" FromRole="Participant" ToRole="JnJCompetitors" />
+          <NavigationProperty Name="StrictlyCompetitors" Relationship="WCSEventsModel.FK_StrictlyCompetitors_Participant1" FromRole="Participant" ToRole="StrictlyCompetitors" />
         </EntityType>
         <EntityContainer Name="WCSEventsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Participant" EntityType="Self.Participant" />
           <EntitySet Name="sysdiagrams" EntityType="WCSEventsModel.sysdiagrams" />
           <EntitySet Name="JnJCompetitors" EntityType="WCSEventsModel.JnJCompetitors" />
-          <EntitySet Name="StrictlyCompetitors" EntityType="WCSEventsModel.StrictlyCompetitors" />
-          <AssociationSet Name="FK_Competitors_Participant1" Association="WCSEventsModel.FK_Competitors_Participant1">
+          <AssociationSet Name="FK_JnJCompetitors_Participant" Association="WCSEventsModel.FK_JnJCompetitors_Participant">
             <End Role="Participant" EntitySet="Participant" />
             <End Role="JnJCompetitors" EntitySet="JnJCompetitors" />
           </AssociationSet>
-          <AssociationSet Name="FK_StrictlyCompetitors_Participant" Association="WCSEventsModel.FK_StrictlyCompetitors_Participant">
+          <EntitySet Name="StrictlyCompetitors" EntityType="WCSEventsModel.StrictlyCompetitors" />
+          <AssociationSet Name="FK_StrictlyCompetitors_Participant1" Association="WCSEventsModel.FK_StrictlyCompetitors_Participant1">
             <End Role="Participant" EntitySet="Participant" />
             <End Role="StrictlyCompetitors" EntitySet="StrictlyCompetitors" />
           </AssociationSet>
@@ -135,29 +139,18 @@
         </EntityType>
         <EntityType Name="JnJCompetitors">
           <Key>
-            <PropertyRef Name="ParticipantID" />
+            <PropertyRef Name="Bib" />
           </Key>
           <Property Name="ParticipantID" Type="Int32" Nullable="false" />
           <Property Name="JnJRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="WsdcNumber" Type="Int32" />
           <Property Name="JnJDivision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Participant" Relationship="WCSEventsModel.FK_Competitors_Participant1" FromRole="JnJCompetitors" ToRole="Participant" />
+          <Property Name="Bib" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Participant" Relationship="WCSEventsModel.FK_JnJCompetitors_Participant" FromRole="JnJCompetitors" ToRole="Participant" />
         </EntityType>
-        <EntityType Name="StrictlyCompetitors">
-          <Key>
-            <PropertyRef Name="ParticipantID" />
-          </Key>
-          <Property Name="ParticipantID" Type="Int32" Nullable="false" />
-          <Property Name="StrictlyRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StrictlyDivision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PartnerFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PartnerLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PartnerID" Type="Int32" />
-          <NavigationProperty Name="Participant" Relationship="WCSEventsModel.FK_StrictlyCompetitors_Participant" FromRole="StrictlyCompetitors" ToRole="Participant" />
-        </EntityType>
-        <Association Name="FK_Competitors_Participant1">
+        <Association Name="FK_JnJCompetitors_Participant">
           <End Type="WCSEventsModel.Participant" Role="Participant" Multiplicity="1" />
-          <End Type="WCSEventsModel.JnJCompetitors" Role="JnJCompetitors" Multiplicity="0..1" />
+          <End Type="WCSEventsModel.JnJCompetitors" Role="JnJCompetitors" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Participant">
               <PropertyRef Name="ParticipantID" />
@@ -167,9 +160,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StrictlyCompetitors_Participant">
+        <EntityType Name="StrictlyCompetitors">
+          <Key>
+            <PropertyRef Name="Bib" />
+          </Key>
+          <Property Name="ParticipantID" Type="Int32" Nullable="false" />
+          <Property Name="StrictlyRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StrictlyDivision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartnerFirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartnerLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartnerID" Type="Int32" />
+          <Property Name="Bib" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Participant" Relationship="WCSEventsModel.FK_StrictlyCompetitors_Participant1" FromRole="StrictlyCompetitors" ToRole="Participant" />
+        </EntityType>
+        <Association Name="FK_StrictlyCompetitors_Participant1">
           <End Type="WCSEventsModel.Participant" Role="Participant" Multiplicity="1" />
-          <End Type="WCSEventsModel.StrictlyCompetitors" Role="StrictlyCompetitors" Multiplicity="0..1" />
+          <End Type="WCSEventsModel.StrictlyCompetitors" Role="StrictlyCompetitors" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Participant">
               <PropertyRef Name="ParticipantID" />
@@ -188,6 +194,7 @@
           <EntitySetMapping Name="Participant">
             <EntityTypeMapping TypeName="WCSEventsModel.Participant">
               <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
                 <ScalarProperty Name="WorkshopRole" ColumnName="WorkshopRole" />
                 <ScalarProperty Name="CompRole" ColumnName="CompRole" />
                 <ScalarProperty Name="WorkshopLevel" ColumnName="WorkshopLevel" />
@@ -215,6 +222,7 @@
           <EntitySetMapping Name="JnJCompetitors">
             <EntityTypeMapping TypeName="WCSEventsModel.JnJCompetitors">
               <MappingFragment StoreEntitySet="JnJCompetitors">
+                <ScalarProperty Name="Bib" ColumnName="Bib" />
                 <ScalarProperty Name="JnJDivision" ColumnName="JnJDivision" />
                 <ScalarProperty Name="WsdcNumber" ColumnName="WsdcNumber" />
                 <ScalarProperty Name="JnJRole" ColumnName="JnJRole" />
@@ -225,6 +233,7 @@
           <EntitySetMapping Name="StrictlyCompetitors">
             <EntityTypeMapping TypeName="WCSEventsModel.StrictlyCompetitors">
               <MappingFragment StoreEntitySet="StrictlyCompetitors">
+                <ScalarProperty Name="Bib" ColumnName="Bib" />
                 <ScalarProperty Name="PartnerID" ColumnName="PartnerID" />
                 <ScalarProperty Name="PartnerLastName" ColumnName="PartnerLastName" />
                 <ScalarProperty Name="PartnerFirstName" ColumnName="PartnerFirstName" />

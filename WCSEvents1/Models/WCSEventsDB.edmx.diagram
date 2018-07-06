@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="86ce44e1e4e64ab69ef203cc7e3997f2" Name="Diagram1">
-        <EntityTypeShape EntityType="WCSEventsModel.Participant" Width="1.5" PointX="7.875" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WCSEventsModel.sysdiagrams" Width="1.5" PointX="5.125" PointY="1.25" />
-        <EntityTypeShape EntityType="WCSEventsModel.JnJCompetitors" Width="1.5" PointX="10" PointY="0.75" />
-        <EntityTypeShape EntityType="WCSEventsModel.StrictlyCompetitors" Width="1.5" PointX="10" PointY="2.875" />
-        <AssociationConnector Association="WCSEventsModel.FK_Competitors_Participant1" />
-        <AssociationConnector Association="WCSEventsModel.FK_StrictlyCompetitors_Participant" />
+        <EntityTypeShape EntityType="WCSEventsModel.Participant" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WCSEventsModel.sysdiagrams" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="WCSEventsModel.JnJCompetitors" Width="1.5" PointX="6.25" PointY="0.75" />
+        <AssociationConnector Association="WCSEventsModel.FK_JnJCompetitors_Participant" />
+        <EntityTypeShape EntityType="WCSEventsModel.StrictlyCompetitors" Width="1.5" PointX="8.125" PointY="1.375" />
+        <AssociationConnector Association="WCSEventsModel.FK_StrictlyCompetitors_Participant1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

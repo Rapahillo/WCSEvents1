@@ -14,6 +14,13 @@ namespace WCSEvents1.Models
     
     public partial class Participant
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Participant()
+        {
+            this.JnJCompetitors = new HashSet<JnJCompetitors>();
+            this.StrictlyCompetitors = new HashSet<StrictlyCompetitors>();
+        }
+    
         public int ParticipantID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,8 +31,11 @@ namespace WCSEvents1.Models
         public string WorkshopLevel { get; set; }
         public string CompRole { get; set; }
         public string WorkshopRole { get; set; }
+        public string Paid { get; set; }
     
-        public virtual JnJCompetitors JnJCompetitors { get; set; }
-        public virtual StrictlyCompetitors StrictlyCompetitors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JnJCompetitors> JnJCompetitors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StrictlyCompetitors> StrictlyCompetitors { get; set; }
     }
 }

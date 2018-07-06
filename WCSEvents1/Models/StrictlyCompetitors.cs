@@ -20,6 +20,7 @@ namespace WCSEvents1.Models
         public string PartnerFirstName { get; set; }
         public string PartnerLastName { get; set; }
         public Nullable<int> PartnerID { get; set; }
+        public int Bib { get; set; }
     
         public virtual Participant Participant { get; set; }
     }
